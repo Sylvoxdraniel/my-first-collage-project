@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('departments', function (Blueprint $table) {
+            $table->text('labs')->nullable()->after('description');
+            $table->text('outcomes')->nullable()->after('labs');
+            $table->text('careers')->nullable()->after('outcomes');
+            $table->text('achievements')->nullable()->after('careers');
+            $table->text('activities')->nullable()->after('achievements');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('departments', function (Blueprint $table) {
+            $table->dropColumn(['labs', 'outcomes', 'careers', 'achievements', 'activities']);
+        });
+    }
+};
